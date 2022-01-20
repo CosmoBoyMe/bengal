@@ -1,0 +1,304 @@
+// HELPERS
+
+@import "./helpers/vars";
+@import "./helpers/mixins";
+
+//BASE
+
+@import "./base/global";
+@import "./base/reset";
+
+// BURGER
+
+.burger {
+  display: none;
+  --burger-width: 40px;
+  --burger-height: 20px;
+  --burger-line-height: 2px;
+  position: relative;
+  border: none;
+  padding: 0;
+  width: var(--burger-width);
+  height: var(--burger-height);
+  color: white;
+  background-color: transparent;
+  cursor: pointer;
+  @media (max-width: $breakpoint768) {
+    display: block;
+  }
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: var(--burger-line-height);
+    background-color: currentColor;
+    transition: transform 0.3s ease-in-out, top 0.3s ease-in-out;
+  }
+  &::before {
+    top: 0;
+  }
+  &::after {
+    top: calc(100% - var(--burger-line-height));
+  }
+  &__line {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: var(--burger-line-height);
+    background-color: currentColor;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease-in-out;
+  }
+  &--active::before {
+    top: 50%;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease-in-out, top 0.3s ease-in-out;
+  }
+  &--active::after {
+    top: 50%;
+    transform: rotate(-45deg);
+    transition: transform 0.3s ease-in-out, top 0.3s ease-in-out;
+  }
+  &--active &__line {
+    transform: scale(0);
+    transition: transform 0.3s ease-in-out;
+  }
+  &:focus::after {
+    opacity: 1;
+  }
+}
+
+// HEADER
+.header {
+  background-color: $dark-black;
+  &__nav {
+    padding: 25px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @media (max-width: $breakpoint768) {
+      padding: 20px 0;
+    }
+  }
+  .logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 40px;
+  }
+  .nav {
+    @media (max-width: $breakpoint768) {
+      display: none;
+    }
+    &__list {
+      display: flex;
+      column-gap: 40px;
+    }
+    &__item-link {
+      padding: 5px;
+      text-decoration: none;
+      color: rgba(253, 242, 230, 0.83);
+      transition: color 0.7s;
+      &:hover {
+        color: $orange;
+      }
+    }
+  }
+
+  &__phone-link {
+    width: 120px;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid $orange;
+    border-radius: 20px;
+    color: $white;
+    text-decoration: none;
+    transition: 0.7s;
+    &:hover {
+      background-color: $orange;
+    }
+    @media (max-width: $breakpoint768) {
+      display: none;
+    }
+  }
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    padding: 35px 0 75px;
+    @media (max-width: $breakpoint1024) {
+      padding-bottom: 35px;
+    }
+    @media (max-width: $breakpoint768) {
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+  }
+
+  &__info {
+    min-width: 457px;
+    margin-right: 30px;
+    margin-top: 130px;
+    @media (max-width: $breakpoint1024) {
+      min-width: 350px;
+      margin-top: 50px;
+    }
+    @media (max-width: $breakpoint768) {
+      margin-top: 0;
+      margin-right: 0;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    @media (max-width: $breakpoint420) {
+      min-width: 0;
+    }
+  }
+
+  &__addres {
+    font-weight: 400;
+    color: $orange;
+    font-size: 24px;
+    margin-bottom: 20px;
+    @media (max-width: $breakpoint420) {
+      font-size: 20px;
+      line-height: 26px;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__title {
+    font-size: 55px;
+    line-height: 60px;
+    margin-bottom: 40px;
+    @media (max-width: $breakpoint1024) {
+      font-size: 36px;
+      line-height: 46px;
+      margin-bottom: 30px;
+    }
+    @media (max-width: $breakpoint420) {
+      font-size: 32px;
+      line-height: 40px;
+      margin-bottom: 30px;
+    }
+  }
+  &__btn {
+    width: 210px;
+    height: 50px;
+    border: 1px solid $orange;
+    color: white;
+    background-color: transparent;
+    transition: background-color 0.7s;
+    &:hover {
+      background-color: $orange;
+    }
+  }
+}
+
+// ADVANTAGE
+
+.advantage {
+  padding: 100px 0;
+  background-color: $light-black;
+  @media (max-width: $breakpoint768) {
+    padding: 60px 0;
+  }
+  &__title {
+    font-size: 45px;
+    line-height: 60px;
+    text-align: center;
+    margin-bottom: 75px;
+    @media (max-width: $breakpoint768) {
+      font-size: 36px;
+      line-height: 45px;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-between;
+    gap: 30px;
+    @media (max-width: $breakpoint1024) {
+      justify-content: center;
+      grid-template-columns: 75%;
+      grid-template-rows: repeat(3, 1fr);
+    }
+    @media (max-width: $breakpoint768) {
+      grid-template-columns: 1fr;
+    }
+  }
+  &__item {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 360px;
+    background-color: $dark-black;
+    height: 300px;
+    padding: 60px 20px 20px 20px;
+
+    &::before {
+      padding-bottom: 100px;
+      align-self: center;
+      display: block;
+      width: 75px;
+      height: 75px;
+      margin-bottom: 45px;
+    }
+    &--1::before {
+      content: url(../assets/svg/health.svg);
+    }
+    &--2::before {
+      content: url(../assets/svg/paw.svg);
+    }
+    &--3::before {
+      content: url(../assets/svg/food.svg);
+    }
+    &-text {
+      font-size: 16px;
+      line-height: 26px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+// FOOTER
+
+.footer {
+  background-color: $dark-black;
+  &__inner {
+    padding: 25px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 100px;
+    @media (max-width: $breakpoint768) {
+      flex-direction: column;
+      row-gap: 15px;
+      margin: 0;
+      padding: 20px 0;
+    }
+  }
+
+  &__addres {
+    font-size: 18px;
+    line-height: 30px;
+    color: rgba(253, 242, 230, 0.83);
+  }
+  &__logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  &__phone-link {
+    text-decoration: none;
+    color: rgba(253, 242, 230, 0.83);
+    transition: color 0.7s;
+    letter-spacing: 1px;
+    &:hover {
+      color: $orange;
+    }
+  }
+}
